@@ -1,3 +1,10 @@
+const dotenv = require('dotenv');
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config()
+}
+
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
@@ -40,6 +47,14 @@ module.exports = {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            resolve: `gatsby-source-contentful`,
+            options: {
+              spaceId: `c0m26swxsm4n`,
+              accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+              downloadLocal: true,
             },
           },
           `gatsby-remark-prismjs`,
