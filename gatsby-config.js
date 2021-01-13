@@ -54,9 +54,9 @@ module.exports = {
             options: {
               spaceId: `c0m26swxsm4n`,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
-              downloadLocal: true,
             },
           },
+          '@contentful/gatsby-transformer-contentful-richtext',
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
@@ -88,5 +88,6 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    
   ],
 }
