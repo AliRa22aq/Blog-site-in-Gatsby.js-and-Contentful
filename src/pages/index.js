@@ -1,5 +1,8 @@
 import React from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
+import { ComplexCard } from '../components/complexCard'
+import { Grid } from "@material-ui/core"
+import Layout from '../components/layout'
 
 
 const BlogIndex = () => {
@@ -19,15 +22,12 @@ const BlogIndex = () => {
             title
             subtitle
             slug
-            content {
-              raw
-            }
           }
         }
       }
-    ` 
+    `
   )
-  
+
 
   const eachPost = result.allContentfulPost.nodes
 
@@ -35,21 +35,31 @@ const BlogIndex = () => {
 
 
   return (
-    <div> 
-      <h1> Hello Blog post </h1>
-      { eachPost.map((post, index) => {
-        return (
-          <div key={index}> 
-          <h3> {post.title} </h3>
-          <h4> {post.subtitle} </h4>
-          <h6> {post.author} </h6>
-          <img src={post.image.fluid.src} alt= {`image${index}`} />
-          </div>
-        )     
-      })
-    }
+    <Layout>
 
-    </div>
+      <h1> Welcome to Gatsby Blog  </h1>
+
+      <Grid container spacing={4}>
+        {
+          eachPost.map((post, index) => {
+            return (
+
+              <Grid item xl={3} key={index}>
+                <ComplexCard
+                  title={post.title}
+                  subtitle={post.subtitle}
+                  author={post.author}
+                  image={post.image.fluid.src}
+                  slug={post.slug}
+                />
+              </Grid>
+
+            )
+          })
+        }
+      </Grid>
+
+    </Layout>
   )
 }
 
