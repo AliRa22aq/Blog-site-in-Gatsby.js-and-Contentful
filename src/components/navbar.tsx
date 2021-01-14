@@ -4,7 +4,15 @@ import styles from './navbar.module.css'
 const Navbar = () => {
     return (
         <div className={styles.nav}> 
-            Header
+            
+            <div className={styles.head1}>
+                    Gatsby Blog
+            </div>
+            <div className={styles.head2}>
+                    Sing in
+                
+            </div>
+
         </div>
     )
 }

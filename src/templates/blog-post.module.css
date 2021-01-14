@@ -1,0 +1,11 @@
+.paper {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+
+.paper > image {
+    width: 20%;
+}
