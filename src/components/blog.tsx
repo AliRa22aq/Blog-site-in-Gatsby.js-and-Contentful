@@ -3,8 +3,8 @@ import { graphql, useStaticQuery, Link } from "gatsby"
 import { ComplexCard } from './complexCard'
 import { Grid, Button } from "@material-ui/core"
 import styles from './blog.module.css'
+import firebase from "gatsby-plugin-firebase"
 
-import firebase from 'firebase';
 
 
 const Blog = () => {
@@ -71,8 +71,6 @@ const Blog = () => {
           })
         }
       </Grid>
-
-      <Button onSubmit = {signIn}> XXXXXXXXXXXXXXXXXX </Button>
 
     </div>
   )

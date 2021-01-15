@@ -1,18 +1,10 @@
 import firebase from 'firebase';
 
 
+export const auth = firebase.auth();
 
-  const auth = firebase.auth();
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-
+export const provider = new firebase.auth.GoogleAuthProvider();
 
 
 
-  const signIn = () => {
-    auth.signInWithPopup(provider).then(results => {
-        console.log(results)
-    }
 
-    ).catch(error => console.log(error))
-  }
