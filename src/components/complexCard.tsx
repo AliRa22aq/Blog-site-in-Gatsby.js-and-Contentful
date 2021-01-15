@@ -18,15 +18,22 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from "gatsby"
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    textDecoration: 'none',
+
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+    textDecoration: 'none',
+
   },
   expand: {
+      
+    textDecoration: 'none',
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
@@ -37,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
+    textDecoration: 'none',
     backgroundColor: red[500],
   },
 }));
@@ -96,16 +104,16 @@ export const ComplexCard: React.FC<CardProps> = ({title, image, author, subtitle
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        {/* <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
+        <IconButton
+        //   className={clsx(classes.expand, {
+        //     [classes.expandOpen]: expanded,
+        //   })}
+        //   onClick={handleExpandClick}
+        //   aria-expanded={expanded}
+        //   aria-label="show more"
         >
-          <ExpandMoreIcon />
-        </IconButton> */}
+          
+        </IconButton>
       </CardActions>
     </Card>
   );

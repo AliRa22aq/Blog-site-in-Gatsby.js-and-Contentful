@@ -2,34 +2,97 @@ import React from "react"
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Paper from '@material-ui/core/Paper';
 import Layout from "../components/layout";
-import styles from './blog-post.module.css'
+import style from './blog-post.module.css'
+import { useStaticQuery, Link } from "gatsby"
 
 
 
+import { Container, Typography } from '@material-ui/core'
 
-const BlogPostContentfulTemplate = ({pageContext}) => {
+
+const BlogPostContentfulTemplate = ({ pageContext }) => {
   console.log(pageContext.data);
+
+  const blogData = pageContext.data;
+  console.log(blogData.postNo)
+
+
+  const result = useStaticQuery(
+    graphql`
+      {
+        allContentfulPost {
+            totalCount
+          }
+      }
+    `
+  )
+
+  const totalPosts = result.allContentfulPost.totalCount
+
 
   return (
     <Layout>
-      <div className= {styles.paper} >
 
-    <Paper elevation= {3} >
-    
-    <h1>{pageContext.data.title}</h1> <br />
+      <div className={style.paper} >
 
-    <h2>{pageContext.data.subtitle}</h2> <br />
+        <Paper elevation={3} >
+          <Container maxWidth="lg" >
+            <div className={style.blogpost_title}>
+              <Typography className={style.title} >
+                {blogData.title}
+              </Typography>
+              <div className={style.blogpost_subtitle}>
+                <Typography className={style.subtitle} variant="h6" >
+                  {blogData.subtitle}
+                </Typography>
+              </div>
+            </div>
+          </Container>
 
-    <h2>{pageContext.data.author}</h2> <br />
+          <Container maxWidth="lg" >
+            <div className={style.blogpost_imagecontainer}>
+              <div className={style.blogpost_image} >
+                <img src={blogData.image.fluid.src} alt={blogData.title} />
+              </div>
+            </div>
+          </Container>
 
-    <img src={pageContext.data.image.fluid.src} alt="image" />
+          <Container maxWidth="sm" >
+            <div className={style.blogpost_datacontainer} >
+              <div className={style.blogpost_paragraph} >
+                {documentToReactComponents(JSON.parse(blogData.content.raw))}
+              </div>
+            </div>
+            <div className={style.blogpost_author}>
+              <span className={style.author} >Author : </span>
+              <span className={style.authorName} >{blogData.author}</span>
 
-    <p> {documentToReactComponents(JSON.parse(pageContext.data.content.raw))} </p>
+            </div>
+            <div className={style.Blogs_previouspage} >
 
-    </Paper>
-    </div>
+              {/* {
+               blogData.postNo === 1 ? <Link to="/post2" > <button> Next Blog </button> </Link> :
+               blogData.slug == 'post2' ? <Link to="/post3" > <button> Next Blog </button> </Link> :
+               blogData.slug == 'post3' ? <Link to="/post1" > <button> Next Blog </button> </Link> :
+               null
+              } */}
+
+              {
+                blogData.postNo < totalPosts?
+                <Link to={`/post${blogData.postNo+1}`}> <button> Next Blog </button> </Link>:
+                <Link to='/post1'> <button> Next Blog </button> </Link> 
+
+              }
+
+            </div>
+            <div>
+            </div>
+          </Container>
+        </Paper>
+      </div>
     </Layout>
   )
 }
 
 export default BlogPostContentfulTemplate
+

@@ -12,6 +12,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       {
         allContentfulPost {
           nodes {
+            postNo
             author
             image {
               fluid {

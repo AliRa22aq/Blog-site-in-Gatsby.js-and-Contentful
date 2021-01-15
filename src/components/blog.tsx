@@ -1,14 +1,28 @@
 import React from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { ComplexCard } from './complexCard'
-import { Grid } from "@material-ui/core"
+import { Grid, Button } from "@material-ui/core"
 import styles from './blog.module.css'
+
+import firebase from 'firebase';
+
 
 const Blog = () => {
 
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
 
-    const result = useStaticQuery(
-        graphql`
+
+    const signIn = () => {
+    auth.signInWithPopup(provider).then(results => {
+        console.log(results)
+    }
+
+    ).catch(error => console.log(error))
+  }
+
+  const result = useStaticQuery(
+    graphql`
       {
         allContentfulPost {
           nodes {
@@ -25,39 +39,43 @@ const Blog = () => {
         }
       }
     `
-    )
+  )
 
 
-    const eachPost = result.allContentfulPost.nodes
+  const eachPost = result.allContentfulPost.nodes
 
-    console.log(eachPost)
+  console.log(eachPost)
+
+  return (
+    <div className={styles.x} >
+      <h2>Blog List </h2>
+
+      <Grid container spacing={3}  >
+        {
+          eachPost.map((post, index) => {
+            return (
+
+              <Grid item xs={12} md={8} lg={4} key={index} >
+                <ComplexCard
+                  title={post.title}
+                  subtitle={post.subtitle}
+                  author={post.author}
+                  image={post.image.fluid.src}
+                  slug={post.slug}
+                />
 
 
-    return (
-            <div className={styles.x} >
+              </Grid>
 
-                <Grid container spacing={3}  >
-                    {
-                        eachPost.map((post, index) => {
-                            return (
+            )
+          })
+        }
+      </Grid>
 
-                                <Grid item xs={12} lg={4}  key={index} style={{alignItems:"center"}}>
-                                    <ComplexCard
-                                        title={post.title}
-                                        subtitle={post.subtitle}
-                                        author={post.author}
-                                        image={post.image.fluid.src}
-                                        slug={post.slug}
-                                    />
-                                </Grid>
+      <Button onSubmit = {signIn}> XXXXXXXXXXXXXXXXXX </Button>
 
-                            )
-                        })
-                    }
-                </Grid>
-
-            </div>
-    )
+    </div>
+  )
 }
 
 export default Blog;

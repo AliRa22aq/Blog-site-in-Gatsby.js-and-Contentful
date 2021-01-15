@@ -1,7 +1,17 @@
 .x {
     box-sizing: border-box;
-    display: flex;
+    display: block;
     margin: auto;
-    background-color: rgb(27, 20, 19);
-    padding: 20px
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    text-decoration: none;
+
+
   }
+
+  .y {
+
+  }
+
+  
