@@ -46,8 +46,8 @@ const Navbar = () => {
 
                 <a onClick={signIn}> 
 
-                {!user.picture? 
-                    'Sing in' :
+                {!user.picture?
+                    <Button variant="outlined" color="primary"> Sign In</Button>  :
                     <Avatar alt="DP" src={user.picture} /> 
                     }
 

@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Layout from "../components/layout";
 import style from './blog-post.module.css'
 import { useStaticQuery, Link } from "gatsby"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 
 
