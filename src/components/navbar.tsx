@@ -2,32 +2,68 @@ import React from 'react'
 import styles from './navbar.module.css'
 import { Link } from "gatsby"
 import {provider, auth} from './googleSignIn'
-import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from "react-redux"
+import { addUser } from "../store/userSlice"
+import Avatar from '@material-ui/core/Avatar';
+import { Grid, Button } from "@material-ui/core"
+
+
 
 
 
 const Navbar = () => {
 
+
+    const dispatch = useDispatch()
+    const user = useSelector((store) => (store))
+
+    console.log(user)
+
+
+
     const signIn = () => {
         auth.signInWithPopup(provider).then(results => {
             console.log(results)
+            const name = results.user.displayName;
+            const picture = results.additionalUserInfo.profile.picture
+            dispatch(addUser({name, picture}))
+            
         }).catch(error => console.log(error))
-      }
+    }
+
+
 
 
     return (
         <div className={styles.nav}> 
-            
-            <div className={styles.head1}>
-                 <Link to="/">    Gatsby Blog </Link>
-            </div>
-            <div className={styles.head2}>
+            <Grid container>
+                <Grid item xs={6} className={styles.head1}> 
+                <Link to="/">    Gatsby Blog </Link>
+                </Grid>
+                
+                <Grid item xs={6} >
+                <div className={styles.head2}>
+
                 <a onClick={signIn}> 
 
-                    Sing in
-                
+                {!user.picture? 
+                    'Sing in' :
+                    <Avatar alt="DP" src={user.picture} /> 
+                    }
+
                 </a>
+                </div>
+                </Grid>
+
+
+            </Grid>
+
+
+            <div >
             </div>
+
+
+
 
         </div>
     )
