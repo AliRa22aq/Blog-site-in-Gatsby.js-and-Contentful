@@ -1,6 +1,7 @@
 import React from 'react'
 import './src/styles/global.css'
 import "firebase/auth";
+import "node-fetch";
 
 
 import store from "./src/store/userSlice.tsx"
