@@ -1,8 +1,12 @@
 .foot {
-  height: 10vh;
+  height: 20vh;
   margin: auto;
   text-align: center;
-  background-color: transparent;
-  width: 98%;
+  background-color: black;
+  color: white;
   
   }
+
+.anchor {
+  padding: 20px
+}
