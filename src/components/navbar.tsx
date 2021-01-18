@@ -1,14 +1,12 @@
 import React from 'react'
 import styles from './navbar.module.css'
 import { Link } from "gatsby"
-import {provider, auth} from './googleSignIn'
+//import {provider, auth} from './googleSignIn'
 import { useDispatch, useSelector } from "react-redux"
 import { addUser } from "../store/userSlice"
 import Avatar from '@material-ui/core/Avatar';
 import { Grid, Button } from "@material-ui/core"
-
-
-
+import firebase from 'firebase';
 
 
 const Navbar = () => {                                                                                                           
@@ -21,8 +19,11 @@ const Navbar = () => {
 
 
 
-    const signIn = () => {
-        auth.signInWithPopup(provider).then(results => {
+    const signIn = async () => {
+
+
+        var provider = new firebase.auth.GoogleAuthProvider()
+        await  firebase.auth().signInWithPopup(provider).then(results => {
             console.log(results)
             const name = results.user.displayName;
             const picture = results.additionalUserInfo.profile.picture
